@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="430144ea-cf07-406e-b8fd-f34062b357d6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/IHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GolfProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GolfProject/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +14,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HealthSO.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -82,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731396927805</updated>
       <workItem from="1731396929304" duration="17000" />
-      <workItem from="1731411617405" duration="2522000" />
+      <workItem from="1731411617405" duration="8296000" />
     </task>
     <servers />
   </component>

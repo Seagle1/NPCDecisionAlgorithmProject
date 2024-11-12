@@ -795,6 +795,7 @@ GameObject:
   - component: {fileID: 411956786}
   - component: {fileID: 411956788}
   - component: {fileID: 411956787}
+  - component: {fileID: 411956789}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -860,6 +861,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411956785}
   m_CullTransparentMesh: 1
+--- !u!114 &411956789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411956785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dba75bba86eb4c4eb9bb9be5d93a581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSO: {fileID: 11400000, guid: fc3d7f1672ac53d4685edd1722842f5f, type: 2}
+  healthImage: {fileID: 411956787}
 --- !u!1 &470771795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,6 +1270,7 @@ GameObject:
   - component: {fileID: 1555728687}
   - component: {fileID: 1555728689}
   - component: {fileID: 1555728688}
+  - component: {fileID: 1555728690}
   m_Layer: 0
   m_Name: HealthProgressWorldSpace
   m_TagString: Untagged
@@ -1320,6 +1336,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555728686}
   m_CullTransparentMesh: 1
+--- !u!114 &1555728690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555728686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dba75bba86eb4c4eb9bb9be5d93a581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSO: {fileID: 11400000, guid: 049511ed9226dd84f89e0303949a7368, type: 2}
+  healthImage: {fileID: 1555728688}
 --- !u!1 &1678134873
 GameObject:
   m_ObjectHideFlags: 0
