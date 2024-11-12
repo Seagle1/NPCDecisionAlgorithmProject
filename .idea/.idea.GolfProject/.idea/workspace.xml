@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="430144ea-cf07-406e-b8fd-f34062b357d6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GolfProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GolfProject/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="430144ea-cf07-406e-b8fd-f34062b357d6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731396927805</updated>
       <workItem from="1731396929304" duration="17000" />
-      <workItem from="1731411617405" duration="8296000" />
+      <workItem from="1731411617405" duration="8835000" />
     </task>
     <servers />
   </component>
