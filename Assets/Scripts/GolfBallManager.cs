@@ -32,7 +32,7 @@ public class GolfBallManager : MonoBehaviour
             golfBalls.Remove(golfBall);
         }
     }
-    
+
     public List<GameObject> GetAllGolfBalls()
     {
         return new List<GameObject>(golfBalls);

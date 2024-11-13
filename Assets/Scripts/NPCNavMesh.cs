@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,7 +17,7 @@ public class NPCNavMesh : MonoBehaviour, IHealth
 
     private NavMeshAgent agent;
     private GameObject currentTarget;
-
+    private bool isPickingAnimationComplete = true;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -34,12 +35,15 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     
     private void DecideAndMove()
     {
+        if (!isPickingAnimationComplete)
+        {
+            return;
+        }
         if (currentTarget == null || HasReachedTarget())
         {
             if (currentTarget != null)
             {
-                // Simulate picking up the ball
-                PickUpBall(currentTarget);
+                StartCoroutine(PickUpBall(currentTarget));
             }
 
             GameObject bestBall = DecideTarget();
@@ -132,12 +136,16 @@ public class NPCNavMesh : MonoBehaviour, IHealth
 
     public bool IsPicking()
     {
-        return HasReachedTarget();
+        return HasReachedTarget() && !isPickingAnimationComplete;
     }
 
-    private void PickUpBall(GameObject ball)
+    private IEnumerator PickUpBall(GameObject ball)
     {
+        isPickingAnimationComplete = false;
         GolfBallManager.Instance.UnregisterGolfBall(ball);
         Destroy(ball);
+        yield return new WaitForSeconds(2.5f); 
+        isPickingAnimationComplete = true;
+        currentTarget = null;
     }
 }
