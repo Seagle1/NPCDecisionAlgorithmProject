@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class GolfBall : MonoBehaviour
 {
+    [SerializeField] private GolfBallGetInfo golfBallGetInfo;
     [SerializeField] private GolfBallSO[] golfBallSO;
     [SerializeField] private Transform[] easyTransforms;
     [SerializeField] private Transform[] mediumTransforms;
@@ -49,13 +50,15 @@ public class GolfBall : MonoBehaviour
                 continue; 
             }
 
-
             for (int i = 0; i < golfBallSO.instantiateCount; i++)
             {
                 Vector3 randomPos = GetRandomPosition(boxCollider.bounds);
                 float terrainHeight = terrain.SampleHeight(new Vector3(randomPos.x, 0, randomPos.z));
                 randomPos.y += terrainHeight + yOffset;
-                Instantiate(golfBallSO.ballPrefab, randomPos, Quaternion.identity);
+                GameObject golfBallInstance = Instantiate(golfBallSO.ballPrefab, randomPos, Quaternion.identity);
+                golfBallGetInfo.golfBallSO = golfBallSO;
+                
+                GolfBallManager.Instance.RegisterGolfBall(golfBallInstance);
             }
         }
     }

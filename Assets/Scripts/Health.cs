@@ -15,20 +15,20 @@ public class Health : MonoBehaviour, IHealth
     {
         currentHealth = maxHealth;
         HealthUIStatus();
+        UpdateHealthUI();
     }
 
     private void Update()
     {
         DecreaseHealth(Time.deltaTime);
-        UpdateHealthUI();
     }
 
     public void DecreaseHealth(float amount)
     {
         currentHealth -= amount;
         float minHealth = 0;
-        float maxHealth = 100;
         currentHealth = Mathf.Clamp(currentHealth, minHealth, maxHealth);
+        UpdateHealthUI();
     }
 
     private void UpdateHealthUI()
@@ -37,6 +37,16 @@ public class Health : MonoBehaviour, IHealth
         {
             healthImage.fillAmount = currentHealth / maxHealth;
         }
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
     private void HealthUIStatus()
     {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class NPCAnimatorController : MonoBehaviour
 {
    [SerializeField] private TestingNavMesh testingNavMesh;
+   [SerializeField] private NPCNavMesh npcNavMesh;
     private Animator animator;
     private const string IS_WALKING = "IsWalking";
     private const string IS_PICKING = "IsPicking";
@@ -15,14 +16,22 @@ public class NPCAnimatorController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        animator.SetBool(IS_WALKING, npcNavMesh.IsWalking());
+        animator.SetBool(IS_PICKING, npcNavMesh.IsPicking());
+    }
+
+    /*
     private void Start()
     {
         testingNavMesh.OnAnimationSystem += TestingNavMeshOnOnAnimationSystem;
     }
 
-    private void TestingNavMeshOnOnAnimationSystem(object sender, EventArgs e)
+     private void TestingNavMeshOnOnAnimationSystem(object sender, EventArgs e)
     {
         animator.SetBool(IS_WALKING, testingNavMesh.IsWalking());
         animator.SetBool(IS_PICKING, testingNavMesh.IsPicking());
     }
+    */
 }
