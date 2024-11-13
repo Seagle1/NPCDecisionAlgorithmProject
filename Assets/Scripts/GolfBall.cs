@@ -13,7 +13,7 @@ public class GolfBall : MonoBehaviour
     [SerializeField] private Transform[] hardTransforms;
     [SerializeField] private Terrain terrain;
     [SerializeField] private float yOffset = 0.5f;
-    private void Awake()
+    private void Start()
     {
         foreach (var golfBallSO in golfBallSO)
         {
@@ -40,9 +40,21 @@ public class GolfBall : MonoBehaviour
                 Debug.LogError("GolfBallSO level is invalid");
                 return;
         }
-        
+
+        if (currentSpawnTransforms == null)
+        {
+            Debug.LogError("Spawn transforms are not set for level: " + golfBallSO.level);
+            return;
+        }
+
         foreach (var spawnTransform in currentSpawnTransforms)
         {
+            if (spawnTransform == null)
+            {
+                Debug.LogError("Spawn transform is null");
+                continue;
+            }
+
             BoxCollider boxCollider = spawnTransform.GetComponent<BoxCollider>();
             if (boxCollider == null)
             {
@@ -57,11 +69,12 @@ public class GolfBall : MonoBehaviour
                 randomPos.y += terrainHeight + yOffset;
                 GameObject golfBallInstance = Instantiate(golfBallSO.ballPrefab, randomPos, Quaternion.identity);
                 golfBallGetInfo.golfBallSO = golfBallSO;
-                
+            
                 GolfBallManager.Instance.RegisterGolfBall(golfBallInstance);
             }
         }
     }
+
 
     private Vector3 GetRandomPosition(Bounds bounds)
     {
