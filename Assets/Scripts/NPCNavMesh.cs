@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NPCNavMesh : MonoBehaviour, IHealth
 {
@@ -22,8 +24,18 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     private GameObject carriedBall;
     private bool isPickingAnimationComplete = true;
 
+    [Header("Game Over UI")] 
+    [SerializeField] private GameObject gameOverBackgroundPanel;
+    [SerializeField] private GameObject gameOverAnimation;
+    [SerializeField] private Button mainMenuButton;
+    
     private void Awake()
     {
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene(0);
+        });
+        
         agent = GetComponent<NavMeshAgent>();
         health = GetComponent<Health>();
         if (health == null)
@@ -144,6 +156,11 @@ public class NPCNavMesh : MonoBehaviour, IHealth
 
     private void Update()
     {
+        if (health.GetCurrentHealth() <= 0)
+        {
+            DeadHealth();
+            return;
+        }
         if (currentTarget != null)
         {
             agent.SetDestination(currentTarget.transform.position);
@@ -160,11 +177,19 @@ public class NPCNavMesh : MonoBehaviour, IHealth
 
     public bool IsWalking()
     {
+        if (health.GetCurrentHealth() <= 0)
+        {
+            return false;
+        }
         return agent.velocity.magnitude > 0.1f && !IsPicking();
     }
 
     public bool IsPicking()
     {
+        if (health.GetCurrentHealth() <= 0)
+        {
+            return false;
+        }
         return HasReachedTarget() && !isPickingAnimationComplete;
     }
 
@@ -198,5 +223,23 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     private void EarnPoints(int level)
     {
         Debug.Log("Earned points for level: " + level);
+    }
+
+    private void DeadHealth()
+    {
+        agent.isStopped = true;
+        agent.speed = 0f;
+        isPickingAnimationComplete = true;
+        //StopAllCoroutines();
+        ActivateGameOverUI();
+    }
+
+    private void ActivateGameOverUI()
+    {
+        if (gameOverBackgroundPanel != null && gameOverAnimation != null)
+        {
+            gameOverBackgroundPanel.SetActive(true);
+            gameOverAnimation.SetActive(true);
+        }
     }
 }
