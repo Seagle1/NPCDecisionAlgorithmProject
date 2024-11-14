@@ -75,6 +75,7 @@ public class NPCNavMesh : MonoBehaviour, IHealth
                 if (bestBall != null)
                 {
                     currentTarget = bestBall;
+                    agent.stoppingDistance = 1f;
                     agent.SetDestination(currentTarget.transform.position);
                 }
             }
@@ -201,6 +202,7 @@ public class NPCNavMesh : MonoBehaviour, IHealth
         carriedBall.transform.localPosition = Vector3.zero; 
         yield return new WaitForSeconds(2.5f); 
         currentTarget = golfCartTransform.gameObject;
+        agent.stoppingDistance = 2.5f;
         agent.SetDestination(golfCartTransform.position);
         isPickingAnimationComplete = true;
     }
@@ -216,6 +218,7 @@ public class NPCNavMesh : MonoBehaviour, IHealth
         Destroy(carriedBall);
         carriedBall = null;
         yield return new WaitForSeconds(2.5f); 
+        agent.stoppingDistance = 1f;
         currentTarget = null;
         isPickingAnimationComplete = true;
     }
