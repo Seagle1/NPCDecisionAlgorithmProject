@@ -141,24 +141,24 @@ public class NPCNavMesh : MonoBehaviour, IHealth
         float levelFactor = (float)ballLevel / maxLevel;
 
         float changeDistanceWeight = distanceWeight;
-        float adjustedLevelWeight = levelWeight;
+        float changeLevelWeight = levelWeight;
 
         if (currentHealth <= 50 && carriedBall == null)
         {
             changeDistanceWeight *= 1.5f;
-            adjustedLevelWeight *= 0.5f;
+            changeLevelWeight *= 0.5f;
         }
 
         if (currentHealth <= 20 && carriedBall == null)
         {
             changeDistanceWeight *= 2f;
-            adjustedLevelWeight *= 0.2f;
+            changeLevelWeight *= 0.2f;
         }
 
-        float utilityScore = (adjustedLevelWeight * levelFactor) - (changeDistanceWeight * distanceFactor) - (healthWeight * healthFactor);
+        float utilityScore = (changeLevelWeight * levelFactor) - (changeDistanceWeight * distanceFactor) - (healthWeight * healthFactor);
         return utilityScore;
     }
-
+    
     private void Update()
     {
         if (health.GetCurrentHealth() <= 0)
