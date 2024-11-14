@@ -14,10 +14,14 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     [Header("Movement Settings")]
     [SerializeField] private float maxConsiderationDistance = 100f;
     [SerializeField] private float updateInterval = 1f;
+    [SerializeField] private Transform handTransform; 
+    [SerializeField] private Transform golfCartTransform; 
 
     private NavMeshAgent agent;
     private GameObject currentTarget;
+    private GameObject carriedBall;
     private bool isPickingAnimationComplete = true;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -32,25 +36,35 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     {
         InvokeRepeating(nameof(DecideAndMove), 0f, updateInterval);
     }
-    
+
     private void DecideAndMove()
     {
         if (!isPickingAnimationComplete)
         {
             return;
         }
+
         if (currentTarget == null || HasReachedTarget())
         {
             if (currentTarget != null)
             {
-                StartCoroutine(PickUpBall(currentTarget));
+                if (carriedBall == null)
+                {
+                    StartCoroutine(PickUpBall(currentTarget));
+                }
+                else
+                {
+                    StartCoroutine(DeliverBallToCart());
+                }
             }
-
-            GameObject bestBall = DecideTarget();
-            if (bestBall != null)
+            else
             {
-                currentTarget = bestBall;
-                agent.SetDestination(currentTarget.transform.position);
+                GameObject bestBall = DecideTarget();
+                if (bestBall != null)
+                {
+                    currentTarget = bestBall;
+                    agent.SetDestination(currentTarget.transform.position);
+                }
             }
         }
     }
@@ -99,17 +113,28 @@ public class NPCNavMesh : MonoBehaviour, IHealth
         if (distance > maxConsiderationDistance)
         {
             return float.MinValue;
-        } 
-        float distanceFactor = distance / maxConsiderationDistance; 
-        
+        }
+        float distanceFactor = distance / maxConsiderationDistance;
+
         float currentHealth = health.GetCurrentHealth();
         float maxHealth = health.GetMaxHealth();
-        float healthFactor = (maxHealth - currentHealth) / maxHealth; 
+        float healthFactor = (maxHealth - currentHealth) / maxHealth;
 
         int maxLevel = 3;
-        float levelFactor = (float)ballLevel / maxLevel; 
+        float levelFactor = (float)ballLevel / maxLevel;
 
-        float utilityScore = (levelWeight * levelFactor) - (distanceWeight * distanceFactor) - (healthWeight * healthFactor);
+        float changeDistanceWeight = distanceWeight;
+        if (currentHealth <= 30 && carriedBall == null)
+        {
+            changeDistanceWeight *= 0.5f;
+        }
+
+        if (currentHealth <= 15 && carriedBall == null)
+        {
+            changeDistanceWeight *= 0.2f;
+        }
+
+        float utilityScore = (levelWeight * levelFactor) - (changeDistanceWeight * distanceFactor) - (healthWeight * healthFactor);
         return utilityScore;
     }
 
@@ -142,10 +167,32 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     private IEnumerator PickUpBall(GameObject ball)
     {
         isPickingAnimationComplete = false;
-        GolfBallManager.Instance.UnregisterGolfBall(ball);
-        Destroy(ball);
+        carriedBall = ball;
+        carriedBall.transform.SetParent(handTransform);
+        carriedBall.transform.localPosition = Vector3.zero; 
         yield return new WaitForSeconds(2.5f); 
+        currentTarget = golfCartTransform.gameObject;
+        agent.SetDestination(golfCartTransform.position);
         isPickingAnimationComplete = true;
+    }
+
+    private IEnumerator DeliverBallToCart()
+    {
+        isPickingAnimationComplete = false;
+        GolfBallGetInfo ballInfo = carriedBall.GetComponent<GolfBallGetInfo>();
+        if (ballInfo != null)
+        {
+            EarnPoints(ballInfo.GetLevel());
+        }
+        Destroy(carriedBall);
+        carriedBall = null;
+        yield return new WaitForSeconds(2.5f); 
         currentTarget = null;
+        isPickingAnimationComplete = true;
+    }
+
+    private void EarnPoints(int level)
+    {
+        Debug.Log("Earned points for level: " + level);
     }
 }

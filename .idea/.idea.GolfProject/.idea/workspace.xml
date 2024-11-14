@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="430144ea-cf07-406e-b8fd-f34062b357d6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GolfProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GolfProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Animators/NPCAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Animators/NPCAnimator.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GolfScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GolfScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GolfBallManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GolfBallManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NPCNavMesh.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NPCNavMesh.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +91,8 @@
       <updated>1731396927805</updated>
       <workItem from="1731396929304" duration="17000" />
       <workItem from="1731411617405" duration="11993000" />
-      <workItem from="1731486169013" duration="28858000" />
+      <workItem from="1731486169013" duration="29364000" />
+      <workItem from="1731572012359" duration="3990000" />
     </task>
     <servers />
   </component>

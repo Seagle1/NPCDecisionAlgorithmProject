@@ -353,7 +353,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -405,6 +405,8 @@ MonoBehaviour:
   healthWeight: 1
   maxConsiderationDistance: 100
   updateInterval: 1
+  handTransform: {fileID: 933186178}
+  golfCartTransform: {fileID: 2022615966}
 --- !u!1 &273411530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,6 +1432,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565910653}
   m_CullTransparentMesh: 1
+--- !u!1 &933186177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933186178}
+  m_Layer: 0
+  m_Name: SetBallTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933186178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933186177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.001, y: 0.1159, z: 0.0693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 68924163369057309}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1012826617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2087,6 +2120,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893905944}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &2022615966 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 27df667cf88519543b7842fce988a442,
+    type: 3}
+  m_PrefabInstance: {fileID: 1012826617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &42834579539427770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2159,7 @@ Transform:
   - {fileID: 703544480748063677}
   - {fileID: 7479639357940917465}
   - {fileID: 7816951353904224043}
+  - {fileID: 933186178}
   m_Father: {fileID: 4238498622553339517}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
