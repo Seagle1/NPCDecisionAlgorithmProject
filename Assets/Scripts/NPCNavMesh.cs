@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,8 @@ public class NPCNavMesh : MonoBehaviour, IHealth
     [SerializeField] private GameObject gameOverBackgroundPanel;
     [SerializeField] private GameObject gameOverAnimation;
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private TextMeshProUGUI pointsText;
+    private int totalPoints = 0;
     
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class NPCNavMesh : MonoBehaviour, IHealth
         {
             Debug.LogError("Can't find Health Component!!!");
         }
+        UpdatePointsUI();
     }
 
     private void Start()
@@ -225,7 +229,32 @@ public class NPCNavMesh : MonoBehaviour, IHealth
 
     private void EarnPoints(int level)
     {
-        Debug.Log("Earned points for level: " + level);
+        int pointsEarned = GetPointsAccordingToLevel(level);
+        totalPoints += pointsEarned;
+        UpdatePointsUI();
+        Debug.Log("Earned points for level: " + level + "Total points:" + totalPoints);
+    }
+
+    public int GetPointsAccordingToLevel(int level)
+    {
+        if (carriedBall != null)
+        {
+            GolfBallGetInfo ballInfo = carriedBall.GetComponent<GolfBallGetInfo>();
+            
+            if (ballInfo != null && ballInfo.golfBallSO != null)
+            {
+                return ballInfo.golfBallSO.points;
+            }
+        }
+        return 0;
+    }
+
+    private void UpdatePointsUI()
+    {
+        if (pointsText != null)
+        {
+            pointsText.text = "Points: " + totalPoints.ToString();
+        }
     }
 
     private void DeadHealth()
